@@ -1,0 +1,71 @@
+<?php
+
+function favorites_menu() {
+    $items = array();
+    $items['places'] = array(
+        'title' => 'Favorite Places',
+        'page callback' => 'places_display',
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+    );
+    $items['foods'] = array(
+        'title' => 'Favorite Foods',
+        'page callback' => 'foods_display',
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+    );
+    $items['activities'] = array(
+        'title' => 'Favorite Activities',
+        'page callback' => 'activities_display',
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+    );
+    return $items;
+}
+
+function favorites_data() {
+    $favorites = array();
+    $favorites['places'] = array(
+        '1' => 'Seattle',
+        '2' => 'Cannon Beach',
+        '3' => 'San Diego',
+    );
+    $favorites['foods'] = array(
+        '1' => 'Chocolate',
+        '2' => 'Cheese',
+        '3' => 'Sushi',
+    );
+    $favorites['activities'] = array(
+        '1' => 'Hiking',
+        '2' => 'Running',
+        '3' => 'Bowling',
+    );
+    return $favorites;
+}
+
+function places_display() {
+    $favorites = favorites_data();
+    $places_text = "";
+    foreach ($favorites['places'] as $key => $value) {
+        $places_text .= "<p>" . $value . "</p>";
+    }
+    return $places_text;
+}
+
+function foods_display() {
+    $favorites = favorites_data();
+    $foods_text = "";
+    foreach ($favorites['foods'] as $key => $value) {
+        $foods_text .= "<p>" . $value . "</p>";
+    }
+    return $foods_text;
+}
+
+function activities_display() {
+    $favorites = favorites_data();
+    $activities_text = "";
+    foreach ($favorites['activities'] as $key => $value) {
+        $activities_text .= "<p>" . $value . "</p>";
+    }
+    return $activities_text;
+}

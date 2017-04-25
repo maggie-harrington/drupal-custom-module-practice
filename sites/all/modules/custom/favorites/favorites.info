@@ -1,0 +1,5 @@
+name = Favorites
+description = Creates 3 menu items, each of which lead to a different page displaying a list of favorites.
+package = Maggie's Custom Modules
+core = 7.x
+files[] = favorites.module
