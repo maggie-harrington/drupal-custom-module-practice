@@ -11,7 +11,7 @@ function groceries_menu() {
     return $items;
 }
 
-function groceries_display() {
+function groceries_array() {
     $grocery_list = array();
     $grocery_list['eggs'] = array(
         'unit price' => 2.99,
@@ -37,6 +37,11 @@ function groceries_display() {
         'unit price' => 1.49,
         'quantity' => 3,
     );
+    return $grocery_list;
+}
+
+function groceries_display() {
+    $grocery_list = groceries_array();
 
     $item_names = array();
     $item_prices = array();
@@ -47,10 +52,10 @@ function groceries_display() {
     foreach ($grocery_list as $item_name => $item_info) {
         array_push($item_names, $item_name);
 
-        $item_price = $grocery_list[$item_name]['unit price'];
+        $item_price = $item_info['unit price'];
         array_push($item_prices, $item_price);
 
-        $item_quantity = $grocery_list[$item_name]['quantity'];
+        $item_quantity = $item_info['quantity'];
         array_push($item_quantities, $item_quantity);
 
         $item_total = $item_price * $item_quantity;
