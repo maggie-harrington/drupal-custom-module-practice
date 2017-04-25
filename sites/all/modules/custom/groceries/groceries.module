@@ -1,0 +1,89 @@
+<?php
+
+function groceries_menu() {
+    $items = array();
+    $items['groceries'] = array(
+        'title' => 'Grocery List',
+        'page callback' => 'groceries_display',
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+    );
+    return $items;
+}
+
+function groceries_display() {
+    $grocery_list = array();
+    $grocery_list['eggs'] = array(
+        'unit price' => 2.99,
+        'quantity' => 2,
+    );
+    $grocery_list['milk'] = array(
+        'unit price' => 3.99,
+        'quantity' => 1,
+    );
+    $grocery_list['apples'] = array(
+        'unit price' => 0.99,
+        'quantity' => 6,
+    );
+    $grocery_list['bananas'] = array(
+        'unit price' => 0.59,
+        'quantity' => 4,
+    );
+    $grocery_list['bread'] = array(
+        'unit price' => 2.79,
+        'quantity' => 1,
+    );
+    $grocery_list['tomatoes'] = array(
+        'unit price' => 1.49,
+        'quantity' => 3,
+    );
+
+    $item_names = array();
+    $item_prices = array();
+    $item_quantities = array();
+    $item_totals = array();
+    $overall_total = 0;
+
+    foreach ($grocery_list as $item_name => $item_info) {
+        array_push($item_names, $item_name);
+
+        $item_price = $grocery_list[$item_name]['unit price'];
+        array_push($item_prices, $item_price);
+
+        $item_quantity = $grocery_list[$item_name]['quantity'];
+        array_push($item_quantities, $item_quantity);
+
+        $item_total = $item_price * $item_quantity;
+        array_push($item_totals, $item_total);
+
+        $overall_total += $item_total;
+    }
+
+    $item_names = implode("<br>", $item_names);
+    $item_prices = implode("<br>$", $item_prices);
+    $item_quantities = implode("<br>", $item_quantities);
+    $item_totals = implode("<br>$", $item_totals);
+
+    return "
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Unit Price</th>
+                <th>Quantity Needed</th>
+                <th>Total Item Price</th>
+            </tr>
+            <tr>
+                <td>$item_names</td>
+                <td>$$item_prices</td>
+                <td>$item_quantities</td>
+                <td>$$item_totals</td>
+            </tr>
+            <tr>
+                <td><strong>TOTAL:</strong></td>
+                <td></td>
+                <td></td>
+                <td><strong>$$overall_total</strong></td>
+            </tr>
+        </table>
+    ";
+}

@@ -1,0 +1,5 @@
+name = Groceries
+description = Displays grocery list with unit price and quantities.
+package = Maggie's Custom Modules
+core = 7.x
+files[] = groceries.module
