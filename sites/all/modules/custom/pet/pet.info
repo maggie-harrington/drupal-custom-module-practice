@@ -1,0 +1,6 @@
+name = Pet
+description = Displays info on my favorite pet with image.
+package = Maggie's Custom Modules
+core = 7.x
+files[] = pet.module
+stylesheets[all][] = pet_styles.css

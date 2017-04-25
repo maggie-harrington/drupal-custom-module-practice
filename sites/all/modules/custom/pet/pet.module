@@ -1,0 +1,35 @@
+<?php
+
+function pet_menu() {
+    $items = array();
+    $items['pet'] = array(
+        'title' => 'My Favorite Pet',
+        'page callback' => 'pet_display',
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+    );
+    return $items;
+}
+
+function pet_data() {
+    $pet = array(
+        '' => '<img src="sites/all/modules/custom/pet/maine_coon.jpg" id="maine-coon">',
+        'Type' => 'Cat',
+        'Breed' => 'Maine Coon',
+        'Description' => 'The Maine Coon is one of the largest domesticated breeds of cat. It has a distinctive physical appearance and valuable hunting skills. It is one of the oldest natural breeds in North America, specifically "native" to the state of Maine (though the feline was simply introduced there), where it is the official state cat. The Maine Coon is a large and sociable cat, hence its nickname, "the gentle giant." It is characterized by a prominent ruff along its chest, robust bone structure, rectangular body shape, a silky flowing coat, and a long, bushy tail. The breed\'s colors vary widely, with only lilac and chocolate disallowed for pedigree. Reputed for its intelligence and playful, gentle personality, the Maine Coon is often cited as having "dog-like" characteristics.',
+        'Link' => '<a href="http://cfa.org/Breeds/BreedsKthruR/MaineCoon.aspx">More Maine Coon info</a>',
+    );
+    return $pet;
+}
+
+function pet_display() {
+    $pet = pet_data();
+
+    $pet_info = "";
+
+    foreach ($pet as $key => $value) {
+        $pet_info .= "<p><strong>" . $key . "</strong><br>" . $value . "</p>";
+    }
+
+    return $pet_info;
+}

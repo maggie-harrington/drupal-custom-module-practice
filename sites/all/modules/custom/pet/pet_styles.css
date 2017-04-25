@@ -1,0 +1,12 @@
+p {
+    color: #5b677a;
+    font-family: verdana;
+}
+
+#maine-coon {
+    width: 400px;
+    height: auto;
+    border-style: double;
+    border-width: 8px;
+    border-color: #3e5882;
+}
