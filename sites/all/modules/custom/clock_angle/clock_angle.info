@@ -1,0 +1,5 @@
+name = Clock Angle
+description = Displays the angle between clock hands for the input time.
+package = Maggie's Custom Modules
+core = 7.x
+files[] = clock_angle.module
