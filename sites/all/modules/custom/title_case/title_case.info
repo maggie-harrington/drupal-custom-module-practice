@@ -1,0 +1,5 @@
+name = Title Case
+description = Converts text into title case.
+package = Maggie's Custom Modules
+core = 7.x
+files[] = title_case.module

@@ -1,0 +1,53 @@
+<?php
+
+function title_case_menu() {
+  $items['title_case'] = array(
+    'title' => 'Title Case Converter',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('title_case_form'),
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  $items['title_case_success_page'] = array(
+    'title' => 'Title Case Results',
+    'page callback' => 'title_case_success',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+function title_case_form() {
+  $form['user_input'] = array(
+    '#title' => 'Input Text: ',
+    '#type' => 'textfield',
+    '#description' => t('Enter a string of text to convert to title case.'),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Convert',
+  );
+
+  return $form;
+}
+
+function title_case_form_submit($form, &$form_state) {
+  $input_text = $form_state['values']['user_input'];
+
+  $output_text = ucwords($input_text);
+
+  $_SESSION['title_case_output'] = $output_text;
+  $form_state['redirect'] = 'title_case_success_page';
+}
+
+function title_case_success() {
+  $output = $_SESSION['title_case_output'];
+
+  return "
+  <h2>Here is your text in title case:</h2><br>
+  $output
+  ";
+}
