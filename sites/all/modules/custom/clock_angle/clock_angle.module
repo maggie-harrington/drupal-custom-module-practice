@@ -24,12 +24,22 @@ function clock_angle_form() {
     '#title' => 'Hours:',
     '#type' => 'textfield',
     '#description' => t('Please enter hours here.'),
+    '#element_validate' => array(
+      'element_validate_integer_positive',
+      'element_validate_hours',
+    ),
+    '#required' => TRUE,
   );
 
   $form['user_input_minutes'] = array(
     '#title' => 'Minutes:',
     '#type' => 'textfield',
     '#description' => t('Please enter minutes here.'),
+    '#element_validate' => array(
+      'element_validate_integer_positive',
+      'element_validate_minutes',
+  ),
+    '#required' => TRUE,
   );
 
   $form['submit'] = array(
@@ -38,6 +48,18 @@ function clock_angle_form() {
   );
 
   return $form;
+}
+
+function element_validate_hours($element) {
+  if ($element['#value'] > 12 || $element['#value'] < 1) {
+    form_error($element, t('Number must be between 1 and 12.'));
+  }
+}
+
+function element_validate_minutes($element) {
+  if ($element['#value'] > 59 || $element['#value'] < 0) {
+    form_error($element, t('Number must be between 0 and 59.'));
+  }
 }
 
 function clock_angle_form_submit($form, &$form_state) {

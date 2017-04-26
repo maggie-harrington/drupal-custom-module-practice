@@ -21,13 +21,25 @@ function sum_form() {
   $form['left_number'] = array(
     '#title' => 'Left number',
     '#type' => 'textfield',
-    '#description' => t('Please enter a number.'),
+    '#description' => t('Please enter an even number between -1000 and 1000.'),
+    '#element_validate' => array(
+      'element_validate_number',
+      'element_validate_range',
+      'element_validate_even',
+    ),
+    '#required' => TRUE,
   );
 
   $form['right_number'] = array(
     '#title' => 'Right number',
     '#type' => 'textfield',
-    '#description' => t('Please enter another number.'),
+    '#description' => t('Please enter another even number between -1000 and 1000.'),
+    '#element_validate' => array(
+      'element_validate_number',
+      'element_validate_range',
+      'element_validate_even',
+    ),
+    '#required' => TRUE,
   );
 
   $form['submit'] = array(
@@ -36,6 +48,18 @@ function sum_form() {
   );
 
   return $form;
+}
+
+function element_validate_range($element) {
+  if ($element['#value'] > 1000 || $element['#value'] < -1000) {
+    form_error($element, t('Number must be less than 1000 and greater than -1000.'));
+  }
+}
+
+function element_validate_even($element) {
+  if ($element['#value'] % 2 != 0) {
+    form_error($element, t('Number must be even.'));
+  }
 }
 
 function sum_form_submit($form, &$form_state) {
