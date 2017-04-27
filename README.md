@@ -3,7 +3,7 @@
 #### (Epicodus Guided Practice)
 
 #### _By Maggie Harrington_
-##### _4-24-17 through 4-26-17_
+##### _4-24-17 through 4-27-17_
 
 
 ## Description
@@ -15,6 +15,7 @@
 
 * Write a basic custom Drupal module in PHP.
 * Use basic forms to collect and display information in a custom module.
+* Use form element validation.
 
 
 ## Setup/Installation Requirements

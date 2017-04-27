@@ -1,0 +1,5 @@
+name = Triangle Tracker
+description = Determines type of triangle based on input side lengths.
+package = Maggie's Custom Modules
+core = 7.x
+files[] = triangle_tracker.module

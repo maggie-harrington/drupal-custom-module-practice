@@ -38,7 +38,7 @@ function clock_angle_form() {
     '#element_validate' => array(
       'element_validate_integer_positive',
       'element_validate_minutes',
-  ),
+    ),
     '#required' => TRUE,
   );
 

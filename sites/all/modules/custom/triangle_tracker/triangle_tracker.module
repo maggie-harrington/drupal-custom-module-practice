@@ -1,0 +1,103 @@
+<?php
+
+function triangle_tracker_menu() {
+  $items['triangle_tracker'] = array(
+    'title' => 'Triangle Tracker',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('triangle_tracker_form'),
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  $items['triangle_tracker_success_page'] = array(
+    'title' => 'Triangle Results',
+    'page callback' => 'triangle_tracker_success',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+function triangle_tracker_form() {
+  $form['side_1'] = array(
+    '#title' => 'Side 1',
+    '#type' => 'textfield',
+    '#description' => t('Please enter length of first side.'),
+    '#required' => TRUE,
+    '#element_validate' => array(
+      'element_validate_integer_positive',
+      'triangle_tracker_form_validate',
+    ),
+  );
+
+  $form['side_2'] = array(
+    '#title' => 'Side 2',
+    '#type' => 'textfield',
+    '#description' => t('Please enter length of second side.'),
+    '#required' => TRUE,
+    '#element_validate' => array(
+      'element_validate_integer_positive',
+      'triangle_tracker_form_validate',
+    ),
+  );
+
+  $form['side_3'] = array(
+    '#title' => 'Side 3',
+    '#type' => 'textfield',
+    '#description' => t('Please enter length of third side.'),
+    '#required' => TRUE,
+    '#element_validate' => array(
+      'element_validate_integer_positive',
+      'triangle_tracker_form_validate',
+    ),
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Check Triangle',
+  );
+
+  return $form;
+}
+
+function triangle_tracker_form_validate($form, &$form_state) {
+  if ($form_state['values']['side_1']
+  > $form_state['values']['side_2'] + $form_state['values']['side_3']
+  || $form_state['values']['side_2']
+  > $form_state['values']['side_1'] + $form_state['values']['side_3']
+  || $form_state['values']['side_3']
+  > $form_state['values']['side_1'] + $form_state['values']['side_2'])
+  {
+    form_set_error('side_1', 'This is not a triangle. The sum of the lengths of any two sides of a triangle must be greater than the length of the third side.');
+  }
+}
+
+function triangle_tracker_form_submit($form, &$form_state) {
+  $side_1 = $form_state['values']['side_1'];
+  $side_2 = $form_state['values']['side_2'];
+  $side_3 = $form_state['values']['side_3'];
+
+  if ($side_1 == $side_2 && $side_1 == $side_3) {
+    $triangle_type = 'equilateral';
+  } elseif ($side_1 == $side_2 || $side_1 == $side_3 || $side_2 == $side_3) {
+    $triangle_type = 'isosceles';
+  } else {
+    $triangle_type = 'scalene';
+  }
+
+  // $triangle_type = 'test';
+
+  $_SESSION['triangle_type'] = $triangle_type;
+  $form_state['redirect'] = ['triangle_tracker_success_page'];
+}
+
+function triangle_tracker_success() {
+  $output = $_SESSION['triangle_type'];
+
+  return "
+  <p>Your triangle is
+  $output
+  </p>
+  ";
+}
